@@ -1,0 +1,29 @@
+.form {
+  width: 400px;
+  height: 100px;
+  position: relative;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #e5f5ba;
+
+}
+.formInput {
+    position: absolute;
+    right: 10px;
+    width: 300px;
+    
+}
+
+.formButton {
+    width: 350px;
+  margin: 20px auto;
+  margin-left: 8px;
+  border: none;
+  color: white;
+  background-color: gray;
+}
+.formButton:hover {
+    background-color: green;
+    cursor: pointer;
+
+}

@@ -1,0 +1,28 @@
+.section {
+    font-size: 40px;
+  color: green;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+}
+.sectionText {
+    margin: 0 auto;
+text-align: center;
+}
+
+.appear {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  .appearActive {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+  }
+  .contactsTitle{
+    font-size: 40px;
+    color: green;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+  }
