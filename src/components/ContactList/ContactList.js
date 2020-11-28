@@ -1,26 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ContactListItem from "./ContactListItem";
 import styles from "./ContactList.module.css";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { connect } from "react-redux";
+import contactsActions from "../../redux/contacts/contactsActions";
 
-const ContactList = ({ contacts, onRemove }) => {
+const ContactList = ({ items, onRemove }) => {
   return (
     <div className={styles.contacts}>
       <TransitionGroup component="ul">
-        {contacts.map(({ id, name, number }) => (
+        {items.map(( item ) => (
           <CSSTransition
-            key={id}
+            key={item.id}
             classNames={styles}
             timeout={250}
             unmountOnExit
           >
-            <ContactListItem
-              key={id}
-              name={name}
-              number={number}
-              onRemove={() => onRemove(id)}
-            />
+            <li className={styles.contactsItem}>
+              <p className={styles.contactsText}>
+                {item.name} : {item.number}
+              </p>
+
+              <button
+                className={styles.contactsButton}
+                type="button"
+                onClick={() => onRemove(item.id)}
+              >
+                ×
+              </button>
+            </li>
           </CSSTransition>
         ))}
       </TransitionGroup>
@@ -41,4 +49,17 @@ ContactList.propTypes = {
   ]),
   onRemove: PropTypes.func.isRequired,
 };
-export default ContactList;
+
+const mapStateToProps = (state) => {
+  const visibleContacts = state.contacts.items.filter((item) =>
+  item.name.toLowerCase().includes(state.contacts.filter.toLowerCase())
+  );
+  return {
+    items: visibleContacts,
+  };
+};
+
+const mapDispatchToProps = {
+  onRemove: contactsActions.removeContact,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
